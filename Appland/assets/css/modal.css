@@ -1,0 +1,97 @@
+/* 모달 CSS  */
+.popup-wrap {
+      background-color: rgba(0, 0, 0, .3);
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      opacity: 0;
+      /* 초기값 */
+      visibility: hidden;
+      /* 보이지 않도록 설정 */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      /* 투명도와 가시성의 전환 효과 */
+      padding: 15px;
+      z-index: 1000;
+  }
+
+  .popup-wrap.show {
+      opacity: 1;
+      /* 보일 때의 투명도 */
+      visibility: visible;
+      /* 보이도록 변경 */
+  }
+
+  .popup-wrap.hide {
+      opacity: 0;
+      /* 서서히 사라짐 */
+      visibility: hidden;
+      /* 사라질 때 */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      /* 서서히 사라짐 */
+  }
+
+  .popup {
+      width: 100%;
+      max-width: 400px;
+      background-color: #264db5;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, .3);
+  }
+
+  .popup-head {
+    padding-top: 20px;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      font-size: x-large;
+  }
+
+  .popup-body {
+      padding: 20px;
+      background-color: #ffffff;
+      text-align: center;
+  }
+
+  .popup-body img {
+    width: 300px;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+.popup-body p {
+    font-size: larger;
+}
+
+  .popup-foot {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #ffffff;
+  }
+
+  .popup-foot .pop-btn {
+      width: 40%;
+      padding: 10px;
+      background-color: #a2e9ff;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: larger;
+      font-weight: 1000;
+  }
+
+  /* 반응형 */
+  @media (max-width: 768px) {
+      .popup {
+          max-width: 90%;
+      }
+  }

@@ -1,0 +1,149 @@
+.media-controls {
+  display: none;
+  align-items: center;
+  background: #ffffff; /* 청록색 배경 */
+  border: 1px solid #b2e8e6; /* 연한 청록색 */
+  border-radius: 32px;
+  color: #595959;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  max-width: calc(100% - 64px);
+  padding: 20px;
+  position: relative;
+}
+
+.media-controls:after {
+  border-radius: 32px;
+  box-shadow:
+    0 2px 2px rgba(135, 206, 250, 0.25), /* 하늘색 */
+    0 4px 4px rgba(135, 206, 250, 0.20),
+    0 8px 8px rgba(135, 206, 250, 0.15),
+    0 16px 16px rgba(135, 206, 250, 0.10),
+    0 24px 24px rgba(135, 206, 250, 0.05);
+  content: '';
+  height: 100%;
+  left: 0;
+  mix-blend-mode: multiply;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.media-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.media-button {
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (min-width: 470px) {
+  .media-button {
+    padding: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+.fas.button-icons img {
+  width: 45px;
+  height: auto;
+}
+.fas.button-icons .side {
+  width: 25px;
+  height: auto;
+}
+
+.button-icons {
+  /* background-color: rgba(135, 206, 250, 0.40); 하늘색 40% */
+  border-radius: 100%;
+  border: 1px solid #b2e8e6; /* 연한 청록색 */
+  padding: 8px;
+}
+.fas.fa-backward.button-icons img {
+  padding-top: 8px; 
+  padding-bottom: 8px; 
+  padding-right: 2px; 
+  padding-left: 0px;
+}
+.fas.fa-forward.button-icons img {
+  padding-top: 8px; 
+  padding-bottom: 8px; 
+  padding-left: 2px; 
+  padding-right: 0px;
+}
+
+.back-button .button-icons,
+.skip-button .button-icons {
+  background-color: transparent;
+  color: #999999;
+}
+
+.play-button .button-icons {
+  border: 1px solid #b2e8e6; /* 연한 청록색 */
+  box-shadow:
+    -1px 1px 1px rgba(135, 206, 250, 0.40),
+    1px -1px 1px rgba(255, 255, 255, 0.25),
+    -2px 2px 2px rgba(135, 206, 250, 0.20),
+    2px -2px 2px rgba(255, 255, 255, 0.20),
+    -4px 4px 4px rgba(135, 206, 250, 0.15),
+    4px -4px 4px rgba(255, 255, 255, 0.15),
+    -8px 8px 8px rgba(135, 206, 250, 0.10),
+    8px -8px 8px rgba(255, 255, 255, 0.10),
+    -16px 16px 16px rgba(135, 206, 250, 0.05),
+    16px -16px 16px rgba(255, 255, 255, 0.05);
+  color: #00ced1; /* 청록색 */
+  margin-bottom: 8px;
+  padding: 12px;
+  padding-left: 17px;
+}
+
+.button-text {
+  margin-top: auto;
+}
+
+.media-progress {
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.progress-bar-wrapper {
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow:
+    inset -1px 1px 1px rgba(135, 206, 250, 0.40), /* 하늘색 */
+    inset 1px -1px 1px rgba(255, 255, 255, 0.25),
+    inset -2px 2px 2px rgba(135, 206, 250, 0.20),
+    inset 2px -2px 2px rgba(255, 255, 255, 0.20),
+    inset -4px 4px 4px rgba(135, 206, 250, 0.15),
+    inset 4px -4px 4px rgba(255, 255, 255, 0.15),
+    inset -8px 8px 8px rgba(135, 206, 250, 0.10),
+    inset 8px -8px 8px rgba(255, 255, 255, 0.10),
+    inset -16px 16px 16px rgba(135, 206, 250, 0.05),
+    inset 16px -16px 16px rgba(255, 255, 255, 0.05);
+  height: 8px;
+  margin-bottom: 8px;
+  margin-top: 5px;
+  position: relative;
+  width: 100%;
+}
+
+.progress-bar {
+  background: linear-gradient(to right, #b2e8e6, rgba(135, 206, 250, 1)); /* 청록색에서 하늘색으로 */
+  border-radius: 8px;
+  box-shadow: none;
+  height: 8px;
+  width: 44%;
+}
