@@ -86,6 +86,45 @@
         mediaControls.style.display = "flex";  // media-controls의 display 속성을 flex로 변경
         audioPlayer.src = filePath;  // 오디오 플레이어에 업로드된 파일 경로를 설정
         audioPlayer.load();  // 새로운 파일을 로드
+
+
+        //분석 시작 버튼 클릭시 서버에게 post 전송
+        analyzeBtn.addEventListener("click", async () => {
+            createModal("fileUpload"); // 모달창 생성
+
+            if (!file) {
+                alert("음성 파일을 선택해 주세요.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("name", fileName); // 파일명 추가
+            // formData.append("audioFile", file); // 실제 파일 추가
+
+            try {
+                const response = await fetch("https://run.mocky.io/v3/9b748e5d-1633-48be-8b58-679979002d31", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log("전송 성공:", result);
+
+                    // 서버로부터 받은 데이터를 localStorage에 저장
+                    localStorage.setItem('serverData', JSON.stringify(result));
+
+                    // output-page.html로 이동
+                    window.location.href = "./output-page.html";
+                } else {
+                    console.error("전송 실패:", response.statusText);
+                }
+            } catch (error) {
+                console.error("전송 중 오류 발생:", error);
+            }
+        });
+
+
     }
 
     // 기존 input 이벤트 리스너에 추가
@@ -168,3 +207,6 @@
         const { target } = event;
         return [...target.files];
     }
+
+    
+    

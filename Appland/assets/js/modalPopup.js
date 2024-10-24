@@ -41,6 +41,21 @@ function createModal(value) {
             </div>
         `; break;
 
+        case "fileUpload": modalContent = `
+            <div class="popup">
+            <div class="popup-head" style="height: 0px;">
+            </div>
+            <div class="popup-body">
+                <img src="./assets/img/modalIcon/roding.webp"><br>
+                <p style="font-size: x-large; font-weight: 1000; ">작업 중 입니다.</p>
+                <p">잠시 기다려주세요.</p>
+            </div>
+            <div class="popup-foot" style="display: none;">
+                <div class="pop-btn" id="confirm">확인</div>
+            </div>
+            </div>
+        `; break;
+
         default: modalContent = `
             <div class="popup">
             <div class="popup-head">
