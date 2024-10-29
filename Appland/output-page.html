@@ -26,8 +26,6 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/soundBar.css" rel="stylesheet">
-  <link href="assets/css/modal.css" rel="stylesheet">
   
 
   <!-- =======================================================
@@ -39,140 +37,22 @@
   ======================================================== -->
 
   <style>
-    :root {
-  --bgColor: #ffffff;
-  --hoverBg: #eeeeee;
-  --text: #000000;
+#secure-img {
+  display: block;
+  margin: 0 auto;
+  height: 300px; /* 고정된 높이 설정 */
+  padding-bottom: 20px;
 }
 
-.dropbox {
-  width: clamp(0px, 100%, 512px);
-  margin: 32px auto;
+.result_header{font-weight: 600; font-size: 60px;}
+.result {
   text-align: center;
+  margin-top: 20px;
+  font-weight: 900;
+  font-size: larger;
 }
+.result_content{font-size: x-large; padding-bottom: 15px;}
 
-
-.label {
-  width: 100%;
-  height: 100%;
-  margin: 0px auto;
-  cursor: pointer;
-  background-color: var(--bgColor);
-  border-radius: 20px; /* 둥근 사각형 */
-  border: 5px dashed #7f7f7f; /* 진한 회색 점선 대신 넓은 간격의 외곽선 */
-  overflow: hidden;
-  position: relative;
-}
-
-.inner {
-  width: 100%;
-  height: 200px;
-  margin: 44px auto;
-  border-radius: 8px;
-  font-size: 25px;
-  line-height: 50px;
-  /* background-color: var(--bgColor); */
-  color: var(--text);
-}
-
-/* @media (any-hover: hover){
-  .inner:hover{
-    background-color: var(--hoverBg);
-  }
-} */
-
-.label--hover{
-  background-color: var(--hoverBg);
-}
-
-.label.uploaded::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
-  transform: skewX(-25deg);
-  transition: 1s;
-}
-
-.label:hover::before {
-  left: 100%;
-}
-
-
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.inner img {
-  transition: transform 1s ease;
-  animation: bounce 2.5s ease infinite; /* 애니메이션을 무한 반복 */
-  animation-play-state: running; /* 초기 상태는 정지 */
-}
-
-
-.preview-title{
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.preview {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  align-items: center;
-  /* background-color: var(--bgColor); */
-}
-
-.embed-img{
-  width: 100%;
-  height: 128px;
-  object-position: center;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.file-info {
-        position: relative;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-
-    /* 분석 시작 버튼이 중앙 하단에 위치하는 스타일 */
-    .analyze-btn {
-        position: relative;
-        top: 110px;
-        padding: 0px 15px;
-        font-size: 20px;
-        background: linear-gradient(90deg, #ff0000, #0000ff);
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-position 1s ease-in-out;
-        background-size: 200% 100%;
-        background-position: 0 0;
-    }
-
-    /* 마우스 호버 시 그라데이션 애니메이션 */
-    .analyze-btn:hover {
-        background-position: 200% 0;
-    }
   </style>
 </head>
 
@@ -242,63 +122,16 @@
     <section id="starter-section" class="starter-section section">
       <div class="inner-container">
       <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Output Voice Data</h2>
-        <p>결과페이지</p><p>공란</p>
+      <div class="container section-title" data-aos="fade-up" style="padding-bottom: 10px;">
+        <img src="./assets/img/outputpage/secure.png" id="secure-img" alt="secure">
+        <div class="result_header">Secure</div>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up">
-
-        <div class="dropbox">
-          <label class="label" id="label" for="input">
-             <div class="inner" id="inner">
-              <img src="./assets/img/fileUpload.png" style="height: auto; width: 20%;">
-              <br>클릭 혹은 원하는 파일을 이곳에 놔주세요. <br> <p style="font-weight: 800;">Drag and Drop</p></div>
-            
-          </label>
-          <input id="input" class="input" accept=".mp3,.m4a,.aac" type="file" required="true" multiple="true" hidden="true">
-          <p class="preview-title">최대 30Mb이하, mp3, m4a, aac 지원 가능</p>
-          <div class="preview" id="preview">
-
-            <div class="media-controls">
-              <audio id="audio-player" src=""></audio>
-              <div class="media-buttons">
-                <button class="back-button media-button" label="back">
-                  <i class="fas fa-step-backward button-icons"><img class="side" src="./assets/img/audioBtn/left_end.png" alt=""></i>
-                  <!-- <span class="button-text milli">Back</span> -->
-                </button>
-            
-                <button class="rewind-button media-button" label="rewind">
-                  <i class="fas fa-backward button-icons"><img src="./assets/img/audioBtn/left.png" alt=""></i>
-                  <!-- <span class="button-text milli">5초 뒤로</span> -->
-                </button>
-            
-                <button class="play-button media-button" label="play">
-                  <i class="fas fa-play button-icons delta"><img id="fa-playImg" src="./assets/img/audioBtn/play.png" alt="" style="width: 30px;"></i>
-                  <!-- <span class="button-text milli">Play</span> -->
-                </button>
-            
-                <button class="fast-forward-button media-button" label="fast forward">
-                  <i class="fas fa-forward button-icons"><img src="./assets/img/audioBtn/right.png" alt=""></i>
-                  <!-- <span class="button-text milli">5초 앞으로</span> -->
-                </button>
-            
-                <button class="skip-button media-button" label="skip">
-                  <i class="fas fa-step-forward button-icons"><img class="side" src="./assets/img/audioBtn/right_end.png" alt=""></i>
-                  <!-- <span class="button-text milli">Skip</span> -->
-                </button>
-              </div>
-              <div class="media-progress">
-                <div class="progress-bar-wrapper progress">
-                  <div class="progress-bar"></div>
-                </div>
-                <div class="progress-time-current milli">0:00</div>
-                <div class="progress-time-total milli">0:00</div>
-              </div>
-            </div>
-          </div>
-       </div>
-
+        <div class="result">
+          <div class="result_content">딥보이스 일 확률 97%</div>
+          <div class="result_comment">대부분이 딥 보이스 입니다. <br>해당 데이터에서 비롯한 피싱을 주의하세요.</div>
+        </div>
       </div>
     </div>
     </section>
@@ -386,10 +219,28 @@
 
   <!-- Main JS File -->
 <script src="assets/js/main.js"></script>
-<script src="assets/js/input-page-dropbox.js"></script>
-<script src="assets/js/audio-player.js"></script>
-<script src="assets/js/modalPopup.js"></script>
+<script>
+  // localStorage에서 서버 데이터를 가져옴
+  const serverData = JSON.parse(localStorage.getItem('serverData'));
 
+  // 데이터를 가져온 후 바로 localStorage에서 삭제
+  localStorage.removeItem('serverData');
+
+    var result_header = document.getElementsByClassName('result_header');
+    var result_content = document.getElementsByClassName('result_content');
+    var result_comment = document.getElementsByClassName('result_comment');
+
+  if (serverData) {
+    if (serverData.real>=90) {
+      result_header.textContent = `파일명: ${serverData.name}`;
+      result_content.textContent = `진짜: ${serverData.real}%`;
+      result_comment.textContent = `가짜: ${serverData.fake}%`;
+    }
+      
+  } else {
+      console.error("서버 데이터가 없습니다.");
+  }
+</script>
 </body>
 
 </html>

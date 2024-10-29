@@ -66,10 +66,10 @@
 
         // 버튼에 마우스 호버 시 그라데이션 애니메이션 적용
         analyzeBtn.addEventListener('mouseover', () => {
-            analyzeBtn.style.backgroundPosition = '200% 0';
+            analyzeBtn.style.backgroundPosition = '0 0';
         });
         analyzeBtn.addEventListener('mouseout', () => {
-            analyzeBtn.style.backgroundPosition = '0 0';
+            analyzeBtn.style.backgroundPosition = '200% 0';
         });
 
         // 버튼을 inner에 추가
