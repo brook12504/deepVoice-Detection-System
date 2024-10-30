@@ -159,12 +159,50 @@ h6 {
   margin-right: 8px;
 }
 
-.header .logo h1 {
-  font-size: 30px;
-  margin: 0;
-  font-weight: 400;
-  color: var(--heading-color);
+
+
+@media (max-width: 376px) {
+  .header .logo h1 {
+    font-size: 17.5px;
+    margin: 0;
+    font-weight: 400;
+    color: var(--heading-color);
+  }
+  .header { padding: 5px 0;}
 }
+
+
+@media (min-width: 376px) and (max-width: 430px){
+  .header .logo h1 {
+    font-size: 19px;
+    margin: 0;
+    font-weight: 400;
+    color: var(--heading-color);
+  }
+  .header { padding: 5px 0;}
+}
+
+@media (min-width: 430px) and (max-width: 500px){
+  .header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 400;
+    color: var(--heading-color);
+  }
+  .header { padding: 10px 0;}
+}
+
+@media (min-width: 500px) {
+  .header .logo h1 {
+    font-size: 30px;
+    margin: 0;
+    font-weight: 400;
+    color: var(--heading-color);
+  }
+  .header { padding: 15px 0;}
+}
+
+
 
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
@@ -197,6 +235,12 @@ h6 {
   .header .navmenu {
     order: 3;
   }
+}
+
+@media (max-width: 376px) {
+  .header .btn-getstarted {
+    margin: 0 0px 0 0;
+}
 }
 
 .scrolled .header {
@@ -688,6 +732,18 @@ h6 {
   font-weight: 700;
   margin: 0;
 }
+@media (max-width: 490px) {
+  .page-title { padding: 10px 0;}
+  .page-title h1 {font-size: 16px;}
+}
+@media (min-width: 490px) and (max-width: 968px) {
+  .page-title { padding: 15px 0;}
+  .page-title h1 {font-size: 22px;}
+}
+@media (min-width: 968px) {
+  .page-title { padding: 20px 0;}
+  .page-title h1 {font-size: 28px;}
+}
 
 .page-title .breadcrumbs ol {
   display: flex;
@@ -729,6 +785,22 @@ section,
     scroll-margin-top: 66px;
   }
 }
+
+@media (max-width: 490px) {
+  section,
+  .section {padding: 20px 0;}
+}
+@media (min-width: 490px) and (max-width: 968px) {
+  section,
+  .section {padding: 40px 0;}
+ 
+}
+@media (min-width: 968px) {
+  section,
+  .section {padding: 60px 0;}
+ 
+}
+
 
 /*--------------------------------------------------------------
 # Global Section Titles
@@ -1434,6 +1506,11 @@ section,
   .starter-section .inner-container {
     width: 70%; /* 작은 화면에서는 너비를 조정 */
   }
+  
+  .starter-section .inner-container {
+    padding-left: 40px;
+    padding-right: 40px;
+}
 }
 
 
@@ -1441,12 +1518,23 @@ section,
   .starter-section .inner-container {
     width: 90%; /* 작은 화면에서는 너비를 조정 */
   }
+  .starter-section .inner-container {
+    padding-left: 20px;
+    padding-right: 20px;
+}
 }
 
-@media (max-width: 480px) {
+@media (max-width: 490px) {
   .starter-section .inner-container {
     width: 95%; /* 모바일에서 가득 차도록 설정 */
   }
+  .starter-section .inner-container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .section-title {
+    padding-bottom: 0px;
+}
 }
 
 
