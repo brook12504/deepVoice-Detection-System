@@ -293,7 +293,8 @@
 
 
           <div class="dropbox">
-            <label class="label" id="label" for="input">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+              <label class="label" id="label" for="input">
               <div class="inner" id="inner">
                 <img src="/templates/assets/img/fileUpload.png" style="height: auto; width: 20%;">
                 <br>클릭 혹은 원하는 파일을 이곳에 놔주세요. <br>
@@ -301,9 +302,10 @@
               </div>
 
             </label>
-            <input id="input" class="input" accept=".mp3,.m4a,.aac" type="file" required="true" multiple="true"
+            <input id="input" class="input" accept=".mp3,.m4a,.aac, .wav" type="file" required="true" multiple="true"
               hidden="true">
-            <p class="preview-title">최대 30Mb이하, mp3, m4a, aac 지원 가능</p>
+            </form>
+            <p class="preview-title">최대 30Mb이하, mp3, m4a, aac, wav 지원 가능</p>
             <div class="preview" id="preview">
 
               <div class="media-controls">

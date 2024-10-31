@@ -18,7 +18,7 @@ function createModal(value) {
                 <h1>확장자 에러</h1>
             </div>
             <div class="popup-body">
-                <img src="./assets/img/modalIcon/errFile.png"><br>
+                <img src="/templates/assets/img/modalIcon/errFile.png"><br>
                 <p>지원되지 않는 확장자입니다.</p>
             </div>
             <div class="popup-foot">
@@ -32,7 +32,7 @@ function createModal(value) {
                 <h1>파일 크기 초과</h1>
             </div>
             <div class="popup-body">
-                <img src="./assets/img/modalIcon/overFileSize.png"><br>
+                <img src="/templates/assets/img/modalIcon/overFileSize.png"><br>
                 <p>파일 크기가 너무 큽니다.</p>
             </div>
             <div class="popup-foot">
@@ -46,7 +46,7 @@ function createModal(value) {
             <div class="popup-head" style="height: 0px;">
             </div>
             <div class="popup-body">
-                <img src="./assets/img/modalIcon/roding.webp"><br>
+                <img src="/templates/assets/img/modalIcon/roding.webp"><br>
                 <p style="font-size: x-large; font-weight: 1000; ">작업 중 입니다.</p>
                 <p">잠시 기다려주세요.</p>
             </div>
@@ -62,7 +62,7 @@ function createModal(value) {
                 <h1>Error</h1>
             </div>
             <div class="popup-body">
-                <img src="./assets/img/modalIcon/default.png"><br>
+                <img src="/templates/assets/img/modalIcon/default.png"><br>
                 <p>에러가 발생했습니다. <br>잠시후 다시 이용해주세요.</p>
             </div>
             <div class="popup-foot">

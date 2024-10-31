@@ -19,7 +19,7 @@ input.addEventListener("change", (event) => {
 });
 
 function handleFileUpload(file) {
-    const allowedExtensions = ['mp3', 'm4a', 'aac']; // 허용된 확장자 목록
+    const allowedExtensions = ['mp3', 'm4a', 'aac', 'wav']; // 허용된 확장자 목록
     const maxFileSize = 30 * 1024 * 1024; // 30MB
 
     const fileName = file.name;
