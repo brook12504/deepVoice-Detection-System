@@ -40,7 +40,7 @@ def upload_file():
         file.save(file_path)  # 파일 저장
 
         # 응답을 JSON 형식으로 반환합니다.
-        return jsonify({"name": file_name, "real": 12, "fake": 88})
+        return jsonify({"name": file_name, "real": 37.4, "fake": 62.6})
 
 if __name__ == '__main__':
     app.run(debug=True)

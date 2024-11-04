@@ -277,6 +277,7 @@
 
   // localStorage에서 서버 데이터를 가져옴
   const serverData = JSON.parse(localStorage.getItem('serverData'));
+  console.log(serverData);
   localStorage.removeItem('serverData');
 
   var secure_img = document.getElementById('secure-img');
@@ -293,30 +294,32 @@
       secure_img.src = "/templates/assets/img/outputpage/secure.png";
       result_header.innerText = `Secure`;
       result_header.style.color = "rgb(18 182 176)";
-      result_comment.innerText = '해당 음성 데이터는 믿을 수 있습니다.\n 음성의 원본을 편안하게 들으세요';
+      result_comment.innerText = '해당 음성 데이터는 믿을 수 있습니다.\n 실제 사용자에 의해 녹음된 음성으로 판단됩니다.';
       animatePercentage(serverData.real, '딥 보이스가 아닐 확률');  // real 값 애니메이션
     } else if (serverData.real >= 70) {
       secure_img.src = "/templates/assets/img/outputpage/attention.png";
       result_header.innerText = `Attention`;
       result_header.style.color = "rgb(255 191 1)";
-      result_comment.innerText = '일부 의심이 가는 구간이 있습니다.\n 재 검사나 일부 구간을 잘라서 다시 주세요.';
+      result_comment.innerText = '원본 음성 데이터의 품질이 좋지 않습니다.\n 재 검사나 일부 구간을 잘라서 다시 주세요.';
       animatePercentage(serverData.fake, '딥 보이스 일 확률'); // fake 값 애니메이션
-    } else if (serverData.real >= 30) {
+    } 
+    // else if (serverData.real >= 50) {
+    //   secure_img.src = "/templates/assets/img/outputpage/caution_1.png";
+    //   result_header.innerText = `Caution`;
+    //   result_header.style.color = "rgb(251 154 4)";
+    //   result_comment.innerText = '딥 보이스 일 확률이 높습니다.\n해당 데이터에서 비롯한 피싱을 주의하세요.';
+    //   animatePercentage(serverData.fake, '딥 보이스 일 확률');
+    // }
+     else if (serverData.real >= 30) {
       secure_img.src = "/templates/assets/img/outputpage/caution_1.png";
-      result_header.innerText = `Caution`;
-      result_header.style.color = "rgb(251 154 4)";
-      result_comment.innerText = '일부 구간이 딥 보이스 입니다.\n가짜와 진짜 부분을 혼동하여 착각 할 수 있으니 주의하세요.';
-      animatePercentage(serverData.fake, '딥 보이스 일 확률');
-    } else if (serverData.real >= 10) {
-      secure_img.src = "/templates/assets/img/outputpage/warning.png";
       result_header.innerText = `Warning`;
-      result_header.style.color = "rgb(230 25 31)";
-      result_comment.innerText = '대부분이 딥 보이스 입니다.\n 해당 데이터에서 비롯한 피싱을 주의하세요.';
+      result_header.style.color = "rgb(251 154 4)";
+      result_comment.innerText = '딥 보이스 일 가능성이 높습니다.\n 해당 데이터는 인위적으로 생성된 것으로 의심되니 주의하세요.';
       animatePercentage(serverData.fake, '딥 보이스 일 확률');
     } else {
-      secure_img.src = "/templates/assets/img/outputpage/danger.png";
+      secure_img.src = "/templates/assets/img/outputpage/warning.png";
       result_header.innerText = `Dangers`;
-      result_header.style.color = "rgb(0 0 0)";
+      result_header.style.color = "rgb(230 25 31)";
       result_comment.innerText = '딥 보이스 입니다.\n 해당 데이터에서 비롯한 피싱을 주의하고, \n유출 사이트와 격리를 권장합니다.';
       animatePercentage(serverData.fake, '딥 보이스 일 확률');
     }
@@ -335,7 +338,21 @@
       const currentTime = performance.now();
       const elapsedTime = currentTime - startTime;
       const progress = Math.min(elapsedTime / duration, 1); // 1을 초과하지 않도록 제한
-      const currentValue = Math.floor(progress * value);
+
+      let currentValue;
+      
+      if (progress < 1) {
+        // 애니메이션 진행 중에는 정수로 표시
+        currentValue = Math.floor(progress * value);
+      } else {
+        // 애니메이션이 끝난 후 소수점 1자리 유지
+        currentValue = value.toFixed(1);
+        
+        // 소수점 첫째 자리가 0이면 정수로 변환
+        if (currentValue.endsWith('.0')) {
+          currentValue = parseInt(currentValue, 10); // 정수 형태로 변환
+        }
+      }
 
       targetElement.innerHTML = `${label} <span style="font-size: 1.2em; font-weight: bold;">${currentValue}%</span>`;
 
@@ -343,6 +360,7 @@
         requestAnimationFrame(update);
       }
     }
+
 
     requestAnimationFrame(update);
   }
