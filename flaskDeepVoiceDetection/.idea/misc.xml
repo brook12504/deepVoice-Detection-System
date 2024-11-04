@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="sdkName" value="deepVoice" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (ycb)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="deepVoice" project-jdk-type="Python SDK" />
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>
