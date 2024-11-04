@@ -76,7 +76,7 @@ function handleFileUpload(file) {
     inner.appendChild(analyzeBtn);
 
     // 라벨 배경을 지정된 이미지로 변경
-    initLabel.style.backgroundImage = 'url("./assets/img/dropboxBackGroung_1.jpg")';
+    initLabel.style.backgroundImage = 'url("/templates/assets/img/dropboxBackGroung_1.jpg")';
     initLabel.style.backgroundSize = 'cover';
 
     // 빛 반사 효과를 위한 클래스 추가
@@ -99,10 +99,10 @@ function handleFileUpload(file) {
 
         const formData = new FormData();
         formData.append("name", fileName); // 파일명 추가
-        // formData.append("audioFile", file); // 실제 파일 추가
+        formData.append("audioFile", file); // 실제 파일 추가
 
         try {
-            const response = await fetch("https://run.mocky.io/v3/9b748e5d-1633-48be-8b58-679979002d31", {
+            const response = await fetch("/upload", {
                 method: "POST",
                 body: formData
             });
@@ -115,7 +115,7 @@ function handleFileUpload(file) {
                 localStorage.setItem('serverData', JSON.stringify(result));
 
                 // output-page.html로 이동
-                window.location.href = "./output-page.html";
+                window.location.href = "/output-page";
             } else {
                 console.error("전송 실패:", response.statusText);
             }

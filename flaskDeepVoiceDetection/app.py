@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, jsonify
 import os
 
 app = Flask(__name__, static_url_path='/templates/assets', static_folder='templates/assets')
@@ -25,18 +25,22 @@ def output_page():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    if 'file' not in request.files:
-        return redirect(request.url)
-
-    file = request.files['file']
+    # 요청에서 파일과 파일명을 받습니다.
+    if 'audioFile' not in request.files:
+        return jsonify({"error": "No file part in the request"}), 400
+    file = request.files['audioFile']
+    file_name = request.form.get('name', file.filename)  # 파일명이 없으면 파일 이름으로 대체
 
     if file.filename == '':
-        return redirect(request.url)
+        return jsonify({"error": "No selected file"}), 400
 
     if file:
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(file_path)
-        return '파일이 성공적으로 업로드되었습니다!'
+        # 파일 저장 경로를 설정합니다.
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
+        file.save(file_path)  # 파일 저장
+
+        # 응답을 JSON 형식으로 반환합니다.
+        return jsonify({"name": file_name, "real": 12, "fake": 88})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -103,7 +103,7 @@
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="/" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="/templates/assets/img/logo.png" alt=""> -->
         <h1 class="sitename">Deep Voice Detection API</h1>
@@ -139,7 +139,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="input-page.html">Get Started</a>
+      <a class="btn-getstarted" href="/input-page">Get Started</a>
 
     </div>
   </header>
@@ -151,8 +151,8 @@
       <div class="container">
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="input-page.html">Processing Page</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/input-page">Processing Page</a></li>
             <li class="current">Result Page</li>
           </ol>
         </nav>
@@ -202,7 +202,7 @@
     <div class="container footer-top" style="padding-top: 20px;">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="d-flex align-items-center">
+          <a href="/" class="d-flex align-items-center">
             <span class="sitename">Team 말벌</span>
           </a>
           <div class="footer-contact pt-3">
@@ -272,7 +272,7 @@
     retryBtn.style.backgroundPosition = '200% 0';
   });
   retryBtn.addEventListener("click", async () => {
-    window.location.href = "input-page.html";
+    window.location.href = "/input-page";
   });
 
   // localStorage에서 서버 데이터를 가져옴
@@ -314,10 +314,10 @@
       result_comment.innerText = '대부분이 딥 보이스 입니다.\n 해당 데이터에서 비롯한 피싱을 주의하세요.';
       animatePercentage(serverData.fake, '딥 보이스 일 확률');
     } else {
-      secure_img.src = "/templates/assets/img/outputpage/warning.png";
+      secure_img.src = "/templates/assets/img/outputpage/danger.png";
       result_header.innerText = `Dangers`;
       result_header.style.color = "rgb(0 0 0)";
-      result_comment.innerText = '딥 보이스 입니다.\n 해당 데이터에서 비롯한 피싱을 주의하고, 유출 사이트와 격리를 권장합니다.';
+      result_comment.innerText = '딥 보이스 입니다.\n 해당 데이터에서 비롯한 피싱을 주의하고, \n유출 사이트와 격리를 권장합니다.';
       animatePercentage(serverData.fake, '딥 보이스 일 확률');
     }
   } else {

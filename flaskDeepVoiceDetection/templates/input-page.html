@@ -222,7 +222,7 @@
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="/" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="/templates/assets/img/logo.png" alt=""> -->
         <h1 class="sitename" id="sitename">Deep Voice Detection API</h1>
@@ -259,7 +259,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="./input-page.html">Get Started</a>
+      <a class="btn-getstarted" href="/input-page">Get Started</a>
 
     </div>
   </header>
@@ -271,7 +271,7 @@
       <div class="container">
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li class="current">Processing Page</li>
           </ol>
         </nav>
@@ -290,11 +290,8 @@
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up">
-
-
           <div class="dropbox">
-            <form action="/upload" method="post" enctype="multipart/form-data">
-              <label class="label" id="label" for="input">
+            <label class="label" id="label" for="input">
               <div class="inner" id="inner">
                 <img src="/templates/assets/img/fileUpload.png" style="height: auto; width: 20%;">
                 <br>클릭 혹은 원하는 파일을 이곳에 놔주세요. <br>
@@ -304,7 +301,7 @@
             </label>
             <input id="input" class="input" accept=".mp3,.m4a,.aac, .wav" type="file" required="true" multiple="true"
               hidden="true">
-            </form>
+
             <p class="preview-title">최대 30Mb이하, mp3, m4a, aac, wav 지원 가능</p>
             <div class="preview" id="preview">
 
@@ -378,7 +375,7 @@
     <div class="container footer-top" style="padding-top: 20px;">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="d-flex align-items-center">
+          <a href="/" class="d-flex align-items-center">
             <span class="sitename">Team 말벌</span>
           </a>
           <div class="footer-contact pt-3">

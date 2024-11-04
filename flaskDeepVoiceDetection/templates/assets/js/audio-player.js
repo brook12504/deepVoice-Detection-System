@@ -17,11 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (audioPlayer.paused) {
         audioPlayer.play();
         playButton.querySelector("i").classList.replace("fa-play", "fa-pause");
-        playButtonImg.src = "./assets/img/audioBtn/pause.png";
+        playButtonImg.src = "/templates/assets/img/audioBtn/pause.png";
       } else {
         audioPlayer.pause();
         playButton.querySelector("i").classList.replace("fa-pause", "fa-play");
-        playButtonImg.src = "./assets/img/audioBtn/play.png";
+        playButtonImg.src = "/templates/assets/img/audioBtn/play.png";
       }
     });
   
