@@ -43,4 +43,4 @@ def upload_file():
         return jsonify({"name": file_name, "real": 37.4, "fake": 62.6})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
