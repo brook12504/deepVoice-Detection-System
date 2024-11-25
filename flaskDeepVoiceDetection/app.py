@@ -3,12 +3,17 @@ import os
 
 app = Flask(__name__, static_url_path='/templates/assets', static_folder='templates/assets')
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 최대 16MB 파일 제한
 
-# uploads 폴더가 없으면 생성합니다.
+ALLOWED_EXTENSIONS = {'wav', 'mp3', 'ogg'}
+
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
@@ -22,25 +27,19 @@ def input_page():
 def output_page():
     return render_template('output-page.html')
 
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    # 요청에서 파일과 파일명을 받습니다.
     if 'audioFile' not in request.files:
         return jsonify({"error": "No file part in the request"}), 400
     file = request.files['audioFile']
-    file_name = request.form.get('name', file.filename)  # 파일명이 없으면 파일 이름으로 대체
-
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
-
-    if file:
-        # 파일 저장 경로를 설정합니다.
+    if file and allowed_file(file.filename):
+        file_name = request.form.get('name', file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
-        file.save(file_path)  # 파일 저장
-
-        # 응답을 JSON 형식으로 반환합니다.
+        file.save(file_path)
         return jsonify({"name": file_name, "real": 37.4, "fake": 62.6})
+    return jsonify({"error": "Invalid file type"}), 400
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
