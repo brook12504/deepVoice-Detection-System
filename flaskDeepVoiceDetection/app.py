@@ -6,8 +6,9 @@ import threading
 import time
 from pydub import AudioSegment
 
-# FFmpeg 경로를 명시적으로 설정
-AudioSegment.converter = r"C:\ffmpeg-7.1-full_build\bin\ffmpeg.exe"
+# 현재 파일(app.py)의 디렉토리를 기준으로 FFmpeg 경로 설정
+project_root = os.path.dirname(os.path.abspath(__file__))
+ffmpeg_path = os.path.join(project_root, "ffmpeg-7.1-full_build", "bin")
 
 
 app = Flask(__name__, static_url_path='/templates/assets', static_folder='templates/assets')
@@ -86,4 +87,7 @@ def upload_file():
 
 
 if __name__ == "__main__":
+    os.environ["PATH"] += os.pathsep + ffmpeg_path
+    AudioSegment.converter = os.path.join(ffmpeg_path, "ffmpeg.exe")
+    AudioSegment.ffprobe = os.path.join(ffmpeg_path, "ffprobe.exe")
     app.run(host="0.0.0.0", port=5000 , debug=True)
