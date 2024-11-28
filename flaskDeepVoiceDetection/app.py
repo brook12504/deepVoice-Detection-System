@@ -5,11 +5,11 @@ import os
 import threading
 import time
 from pydub import AudioSegment
+from preProcessing_model import predict_audio  # Import 추가
 
 # 현재 파일(app.py)의 디렉토리를 기준으로 FFmpeg 경로 설정
 project_root = os.path.dirname(os.path.abspath(__file__))
 ffmpeg_path = os.path.join(project_root, "ffmpeg-7.1-full_build", "bin")
-
 
 app = Flask(__name__, static_url_path='/templates/assets', static_folder='templates/assets')
 
@@ -55,6 +55,7 @@ def upload_file():
         file_name = request.form.get('name', file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
         file.save(file_path)
+        print(f"File saved at: {file_path}")
 
         # 파일 확장자 확인
         file_ext = file.filename.rsplit('.', 1)[1].lower()
@@ -65,25 +66,38 @@ def upload_file():
         try:
             wav_file_path = os.path.splitext(file_path)[0] + ".wav"
             if file_ext != 'wav':  # 이미 WAV 파일이 아닌 경우 변환
+                print(f"Converting file to WAV format: {file_ext}")
                 audio = AudioSegment.from_file(file_path, format=file_ext)
                 audio.export(wav_file_path, format="wav")
                 os.remove(file_path)  # 원본 파일 삭제
+                print(f"Converted file to WAV: {wav_file_path}")
             else:
                 wav_file_path = file_path  # WAV 파일은 그대로 사용
 
-            # 파일 처리 (예: 예측 작업)
-            response_data = {
-                "name": file_name,
-                "real": 37.4,  # 예시값
-                "fake": 62.6  # 예시값
-            }
+            # 파일 예측
+            print(f"Starting prediction for: {wav_file_path}")
+            prediction = predict_audio(wav_file_path)
+            print(f"Prediction completed: {prediction}")
+
+            # NumPy 타입을 Python 기본 타입으로 변환
+            prediction["real"] = float(prediction["real"])
+            prediction["fake"] = float(prediction["fake"])
 
             # 백그라운드에서 일정 시간 후 파일 삭제
             threading.Thread(target=delete_file_later, args=(wav_file_path, 600)).start()
+            # 파일 처리 (예: 예측 작업)
 
-            return jsonify(response_data)
+
+            return jsonify({
+                "name": file_name,
+                "real": prediction["real"],
+                "fake": prediction["fake"]
+            })
+
+
         except Exception as e:
-            return jsonify({"error": f"File conversion failed: {str(e)}"}), 500
+            print(f"Error during processing: {e}")
+            return jsonify({"error": f"File processing failed: {str(e)}"}), 500
 
 
 if __name__ == "__main__":
