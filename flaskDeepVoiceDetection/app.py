@@ -103,10 +103,9 @@ def upload_file():
 
 if __name__ == "__main__":
     # 현재 파일(app.py)의 디렉토리를 기준으로 FFmpeg 경로 설정
-    project_root = os.path.dirname(os.path.abspath(__file__))
-    ffmpeg_path = os.path.join(project_root, "ffmpeg-7.1-full_build", "bin")
+    ffmpeg_path = "/app/ffmpeg-7.1-full_build/bin"
 
-    os.environ["PATH"] += os.pathsep + ffmpeg_path
-    AudioSegment.converter = os.path.join(ffmpeg_path, "ffmpeg.exe")
-    AudioSegment.ffprobe = os.path.join(ffmpeg_path, "ffprobe.exe")
+    os.environ["PATH"] += os.pathsep + ffmpeg_path  # PATH에 FFmpeg 경로 추가
+    AudioSegment.converter = os.path.join(ffmpeg_path, "ffmpeg")  # FFmpeg 실행 파일 경로
+    AudioSegment.ffprobe = os.path.join(ffmpeg_path, "ffprobe")  # ffprobe 실행 파일 경로
     app.run(host="0.0.0.0", port=5000)
