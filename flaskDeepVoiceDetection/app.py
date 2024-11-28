@@ -4,6 +4,10 @@ from flask import Flask, request, redirect, render_template, jsonify
 import os
 import threading
 import time
+from pydub import AudioSegment
+
+# FFmpeg 경로를 명시적으로 설정
+AudioSegment.converter = r"C:\ffmpeg-7.1-full_build\bin\ffmpeg.exe"
 
 
 app = Flask(__name__, static_url_path='/templates/assets', static_folder='templates/assets')
@@ -12,7 +16,7 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 최대 16MB 파일 제한
 
-ALLOWED_EXTENSIONS = {'wav', 'mp3', 'ogg'}
+ALLOWED_EXTENSIONS = {'wav', 'mp3', 'ogg', 'm4a'}
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -51,13 +55,35 @@ def upload_file():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
         file.save(file_path)
 
-        # 파일 처리 (예: 예측 작업)
-        response_data = {"name": file_name, "real": 37.4, "fake": 62.6}
+        # 파일 확장자 확인
+        file_ext = file.filename.rsplit('.', 1)[1].lower()
+        if file_ext not in ALLOWED_EXTENSIONS:
+            return jsonify({"error": "Unsupported file type"}), 400
 
-        # 백그라운드에서 일정 시간 후 파일 삭제
-        threading.Thread(target=delete_file_later, args=(file_path, 600)).start()
+        # WAV 파일로 변환
+        try:
+            wav_file_path = os.path.splitext(file_path)[0] + ".wav"
+            if file_ext != 'wav':  # 이미 WAV 파일이 아닌 경우 변환
+                audio = AudioSegment.from_file(file_path, format=file_ext)
+                audio.export(wav_file_path, format="wav")
+                os.remove(file_path)  # 원본 파일 삭제
+            else:
+                wav_file_path = file_path  # WAV 파일은 그대로 사용
 
-        return jsonify(response_data)
+            # 파일 처리 (예: 예측 작업)
+            response_data = {
+                "name": file_name,
+                "real": 37.4,  # 예시값
+                "fake": 62.6  # 예시값
+            }
+
+            # 백그라운드에서 일정 시간 후 파일 삭제
+            threading.Thread(target=delete_file_later, args=(wav_file_path, 600)).start()
+
+            return jsonify(response_data)
+        except Exception as e:
+            return jsonify({"error": f"File conversion failed: {str(e)}"}), 500
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000 , debug=True)
