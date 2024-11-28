@@ -104,4 +104,7 @@ if __name__ == "__main__":
     os.environ["PATH"] += os.pathsep + ffmpeg_path
     AudioSegment.converter = os.path.join(ffmpeg_path, "ffmpeg.exe")
     AudioSegment.ffprobe = os.path.join(ffmpeg_path, "ffprobe.exe")
+    print(f"Checking FFmpeg path: {AudioSegment.converter}")
+    print(f"Checking ffprobe path: {AudioSegment.ffprobe}")
+    print(f"System PATH: {os.getenv('PATH')}")
     app.run(host="0.0.0.0", port=5000)
