@@ -12,7 +12,7 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 최대 16MB 파일 제한
 
-ALLOWED_EXTENSIONS = {'wav', 'mp3', 'ogg'}
+ALLOWED_EXTENSIONS = {'wav', 'mp3', 'ogg', 'm4a'}
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
