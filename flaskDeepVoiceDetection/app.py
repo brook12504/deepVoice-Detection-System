@@ -99,7 +99,7 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    os.environ["PATH"] += os.pathsep + "/ffmpeg-7.1-full_build/bin"
+    os.environ["PATH"] += "/app/ffmpeg-7.1-full_build/bin"
     AudioSegment.converter = os.path.join("/ffmpeg-7.1-full_build/bin", "ffmpeg.exe")
     AudioSegment.ffprobe = os.path.join("/ffmpeg-7.1-full_build/bin", "ffprobe.exe")
     app.run(host="0.0.0.0", port=5000)
